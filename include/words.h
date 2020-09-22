@@ -6,6 +6,8 @@ void words_add(struct forth *forth);
 
 void drop(struct forth *forth);
 void _dup(struct forth *forth);
+void ntime(struct forth *forth);
+void ltime(struct forth *forth;
 void add(struct forth *forth);
 void sub(struct forth *forth);
 void mul(struct forth *forth);
