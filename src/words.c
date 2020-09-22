@@ -113,11 +113,6 @@ int compare(const void* a, const void* b) {
     return (*(struct name*)b).count - (*(struct name*)a).count;
 }
 
-
-
-
-
-
 void drop(struct forth *forth) {
     forth_pop(forth);
 }
