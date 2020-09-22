@@ -85,7 +85,9 @@ struct word* word_add(struct forth *forth,
     uint8_t length, const char name[length])
 {
     struct word* word = (struct word*)forth->memory_free;
+    forth->countw++;
     word->next = forth->latest;
+    word->count = 0;
     word->length = length;
     word->hidden = false;
     word->immediate = false;
@@ -204,6 +206,9 @@ enum forth_result forth_run(struct forth* forth)
         if (word == NULL) {
             forth_run_number(forth, length, word_buffer);
         } else if (word->immediate || !forth->is_compiling) {
+            struct word* tmp = (void*)word;
+            tmp->count++;
+            
             forth_run_word(forth, word);
         } else {
             forth_emit(forth, (cell)word);
