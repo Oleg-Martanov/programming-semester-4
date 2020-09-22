@@ -90,7 +90,7 @@ struct name {
 
 void stat(struct forth *forth) {
     struct word* itr = forth->latest;
-    struct name* sort = (struct name*)malloc((forth->countword)*(sizeof(struct name)));
+    struct name* sort = (struct name*)malloc((forth->countw)*(sizeof(struct name)));
     int i = 0;
 
     printf("Statistics:\n");
@@ -102,8 +102,8 @@ void stat(struct forth *forth) {
         itr = itr->next;
     }
 
-    qsort(sort,(forth->countword), sizeof(struct name), compare);
-    for (int j = 0; j < forth->countword ; j++) {
+    qsort(sort,(forth->countw), sizeof(struct name), compare);
+    for (int j = 0; j < forth->countw ; j++) {
         printf("%-10s\t %d\n", sort[j].name, sort[j].count);
     }
     free(sort);
