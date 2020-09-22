@@ -25,6 +25,7 @@ int forth_init(struct forth *forth, FILE *input,
     forth->rp0 = malloc(forth->return_size * sizeof(cell));
     forth->rp = forth->rp0;
 
+    forth->countw = 0;
     forth->latest = NULL;
     forth->executing = NULL;
     forth->is_compiling = false;
@@ -88,6 +89,9 @@ struct word* word_add(struct forth *forth,
     word->length = length;
     word->hidden = false;
     word->immediate = false;
+    word->time = 0;
+    forth->countw++;
+    
     memcpy(word->name, name, length);
     forth->memory_free = (cell*)word_code(word);
     assert((char*)forth->memory_free >= word->name + length);
@@ -203,7 +207,12 @@ enum forth_result forth_run(struct forth* forth)
         if (word == NULL) {
             forth_run_number(forth, length, word_buffer);
         } else if (word->immediate || !forth->is_compiling) {
+           struct word* tmp = (void*)word;
+            clock_t start = clock();           
             forth_run_word(forth, word);
+            clock_t end = clock();
+            tmp->time += (end - start);
+            
         } else {
             forth_emit(forth, (cell)word);
         }
