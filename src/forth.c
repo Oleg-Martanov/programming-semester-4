@@ -20,7 +20,7 @@ int forth_init(struct forth *forth, FILE *input,
     forth->data_size = stack;
     forth->sp0 = malloc(forth->data_size * sizeof(cell));
     forth->sp = forth->sp0;
-
+    forth->num_system = 10;
     forth->return_size = ret;
     forth->rp0 = malloc(forth->return_size * sizeof(cell));
     forth->rp = forth->rp0;
@@ -147,8 +147,35 @@ int forth_add_compileword(struct forth *forth,
     return 0;
 }
 
-void cell_print(cell cell) {
+void cell_print(cell cell, int base) {
+    if (base == 10){
     printf("%"PRIdPTR" ", cell);
+        return;
+    }
+   
+    if(cell >> 63){
+            cell = ~(cell - 1);
+            printf("-");
+        }
+    
+    if (base == 16){
+    printf("%"PRIXPTR" ", cell);
+    }
+    else if (base == 8){
+    printf("%"PRIoPTR" ", cell);
+    }
+    
+    else if (base == 2){
+        int i = 63;
+                
+        while((((cell >> i) & 1) == 0) && (i!=0)){
+            i--;
+     }
+     for(int j = i; j >= 0; --j) {
+     printf("%ld", (cell >> j) & 1);
+     }
+        printf(" ");
+       
 }
 
 enum forth_result read_word(FILE* source,
@@ -215,7 +242,7 @@ static void forth_run_number(struct forth *forth,
     size_t length, const char word_buffer[length])
 {
     char* end;
-    intptr_t number = strtoiptr(word_buffer, &end, 10); // FIXME: BASE can be internal variable
+    intptr_t number = strtoiptr(word_buffer, &end, forth->num_system); // FIXME: BASE can be internal variable
     if (end - word_buffer < (int)length) {
         fprintf(stderr, "Unknown word: '%.*s'\n", (int)length, word_buffer);
     } else if (!forth->is_compiling) {
