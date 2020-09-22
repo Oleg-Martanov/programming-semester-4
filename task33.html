@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Теорема о функции распределения</title>
+</head>
+
+<body>
+  <h1>Теорема о функции распределения случайной величины</h1>
+
+  <article>
+
+    <h1>Формулировка</h1>
+
+   <p>
+      Функция распределения F(x) = <b>P</b>{&xi; &le; x} обладает следующими
+      свойствами:
+      <ol>
+        <li>F(x) не убывает,</li>
+        <li>lim<sub>x&rarr;-&infin;</sub> F(x) = 0, lim<sub>x&rarr;&infin;</sub> F(x) = 1</li>
+        <li>F(x) непрерывна справа, <b>P</b>{&xi; &lt; x} = F(x - 0) = lim<sub>x&uarr;y</sub>F(y)</li>
+      </ol>
+   </p>
+
+  </article>
+
+  <article>
+
+    <h1>Доказательство</h1>
+    <section>
+          <p>
+            1. Если x &lt; y, то {&xi; &le; y } &supe; {&xi; &le; x } и так как вероятность - монотонная функция:
+          </p>
+          <p style="text-indent: 100px;">
+            F(x) = <b>P</b>{&xi; &le; x} &le; <b>P</b>{&xi; &le; y} = F(y)
+          </p>
+    </section>
+
+    <section>
+          <p>
+            2. Из равенства &Omega; = &cup;<sub><sub>n&ge;1</sub></sub> (C<sub>n</sub>&#92;C<sub>n-1</sub>),
+            где C<sub>n</sub> = {&omega; : -n &lt; &xi; &le; n}, C<sub>0</sub> = &empty;, получаем, что
+          </p>
+
+          <p style="padding-left: 100px">
+            1 = <b>P</b>{&Omega;} = &Sigma;<sub>n&ge;1</sub><b>P</b>{C<sub>n</sub>&#92;C<sub>n-1</sub>} =
+            lim<sub>N&rarr;&infin;</sub> &Sigma;<sup>N</sup><sub>n=1</sub> <b>P</b>{C<sub>n</sub>&#92;C<sub>n-1</sub>} =<br>
+            = <b>P</b> {C<sub>n</sub>} = lim<sub>n&rarr;&infin;</sub> (F(N) - F(-N)).
+          </p>
+
+          <p>
+            Теперь из того, что F(x) &isin; [0,1] при всех x, следуют равенства
+          </p>
+
+          <p style="text-indent: 100px;">
+            lim<sub>x&rarr;-&infin;</sub> F(-&infin;)=0,
+            lim<sub>x&rarr;-&infin;</sub> F(&infin;)=1,
+          </p>
+      </section>
+        <p>
+          3. Рассмотрим последовательность непересекающихся множеств
+        </p>
+
+        <p style="text-indent: 100px;">
+          B<sub>n</sub> = (&omega;: x + 1/(n+1) &lt; &xi;(&omega;) &le; x + 1/n), n = 1, 2, &#8230;
+        </p>
+
+        <p>
+          Тогда {&omega;: x &lt; &xi; &le; x+1} = &cup;<sub>n&ge;1</sub> B<sub>n</sub> и
+        </p>
+
+        <p style="padding-left: 100px">
+          F(x+1) - F(x) = <b>P</b>{x &lt; &xi; &le; x+1} = <b>P</b>{&cup;<sub>n&ge;1</sub> B<sub>n</sub>} = <br>
+          = &Sigma;<sub>n&ge;1</sub> <b>P</b>{B<sub>n</sub>} = &Sigma;<sub>n&ge;1</sub> (F( x + 1/n) - F(x + 1/(n+1))) = <br>
+          = lim<sub>N&rarr;&infin;</sub> &Sigma;<sup>N</sup><sub>n=1</sub> (F( x + 1/n) - F(x + 1/(n+1))) = <br>
+          = lim<sub>N&rarr;&infin;</sub> (F( x + 1) - F(x + 1/(N+1))).
+        </p>
+
+        <p>Следовательно</p>
+
+        <p style="text-indent: 100px;">
+          F(x) = lim<sub>N&rarr;&infin;</sub> F(x + 1/(N+1)) = F(x + 0) = lim<sub>y&darr;x</sub> F(y).
+        </p>
+
+        <p>Аналогично, рассматривая непересекающиеся множества</p>
+
+        <p style="text-indent: 100px;">
+          A<sub>1</sub> = {&omega;: &xi; &le; x -1}, A<sub>n</sub> = {&omega;: x - 1/(n-1) &lt; &xi; &le; x - 1/n}, n&ge;2,
+        </p>
+
+        <p>для которых {&omega;: &xi; &lt; x} = &cup;<sub>n&ge;1</sub> A<sub>n</sub>, находим</p>
+
+        <p style="padding-left: 100px">
+          <b>P</b>{&xi; &lt; x} = &Sigma;<sub>n&ge;1</sub> <b>P</b>{A<sub>n</sub>} =<br>
+          = F(x - 1) +  &Sigma;<sub>n&ge;2</sub> (F(x - 1/n) - F(x - 1/(n-1))) =<br>
+          = lim<sub>N&rarr;&infin;</sub> (F(x - 1) +  &Sigma;<sup>N</sup><sub>n=2</sub> (F(x - 1/n) - F(x - 1/(n-1)))) =<br>
+          = lim<sub>N&rarr;&infin;</sub> F( x - 1/N) = lim<sub>y&uarr;x</sub> F(y) = F(x - 0).
+        </p>
+
+
+
+
+      <section>
+
+    </section>
+  </article>
+
+</body>
+</html>
