@@ -28,6 +28,7 @@ int forth_init(struct forth *forth, FILE *input,
     forth->latest = NULL;
     forth->executing = NULL;
     forth->is_compiling = false;
+    forth->countw = 0;
     forth->input = input;
 
     return forth->memory == NULL || forth->sp0 == NULL;
