@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <time.h>
 
 struct forth;
 typedef intptr_t cell;
@@ -14,6 +15,7 @@ struct word {
     bool compiled;
     bool hidden;
     bool immediate;
+    clock_t time;
     uint8_t length;
     char name[];
 };
@@ -32,6 +34,7 @@ struct forth {
     cell *memory_free;
     cell *sp0;
     cell *rp0;
+    int countw;
     size_t memory_size;
     size_t return_size;
     size_t data_size;
